@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 220, left: 25),
+                padding: const EdgeInsets.only(top: 50, left: 25),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -99,8 +99,9 @@ class HomeScreen extends StatelessWidget {
                       if (box.read('type') == 'customer') {
                         if (box.read('username') == newUsername &&
                             box.read('password') == newPassword) {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const CustomerHome()));
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => const CustomerHome()));
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: TextRegular(
@@ -111,8 +112,9 @@ class HomeScreen extends StatelessWidget {
                       } else {
                         if (box.read('username') == newUsername &&
                             box.read('password') == newPassword) {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const SellerHome()));
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => const SellerHome()));
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: TextRegular(

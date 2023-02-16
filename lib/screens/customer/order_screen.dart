@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:water_refill/screens/list_screen.dart';
-import 'package:water_refill/screens/station_screen.dart';
+import 'package:water_refill/screens/customer/customer_home.dart';
 import 'package:water_refill/widgets/text_widget.dart';
 
 class OrderScreen extends StatelessWidget {
   OrderScreen({Key? key}) : super(key: key);
   late String gallons;
+  late String days;
   final box = GetStorage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xffA0D6F4),
+        backgroundColor: Colors.blue,
         leading: IconButton(
           onPressed: (() {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => StationScreen()));
+            Navigator.of(context).pop();
           }),
           icon: const Icon(Icons.arrow_back),
         ),
@@ -33,19 +32,19 @@ class OrderScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     TextRegular(
-                        text: box.read('stationName'),
-                        fontSize: 55,
+                        text: 'Station Name',
+                        fontSize: 32,
                         color: Colors.white),
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 25, left: 28),
+                padding: const EdgeInsets.only(top: 10, left: 28),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     TextRegular(
-                        text: ('Address: ') + box.read('stationAddress'),
+                        text: 'Address: Station Address',
                         fontSize: 18,
                         color: Colors.white),
                   ],
@@ -74,6 +73,28 @@ class OrderScreen extends StatelessWidget {
                 ),
               ),
               Padding(
+                padding: const EdgeInsets.only(top: 20, left: 28, right: 28),
+                child: TextFormField(
+                  onChanged: (String input) {
+                    days = input;
+                  },
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                      filled: true,
+                      prefixIcon: const Icon(Icons.add_box),
+                      fillColor: Colors.white,
+                      label: const Text(
+                        'Number of Days to Fill',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      border: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(15))),
+                ),
+              ),
+              Padding(
                 padding: const EdgeInsets.only(top: 25, left: 185),
                 child: MaterialButton(
                     shape: RoundedRectangleBorder(
@@ -82,9 +103,13 @@ class OrderScreen extends StatelessWidget {
                     minWidth: 150,
                     height: 55,
                     onPressed: () {
-                      box.write('numGallons', gallons);
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ListScreen()));
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: TextRegular(
+                              text: 'Order placed!',
+                              fontSize: 12,
+                              color: Colors.white)));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => const CustomerHome()));
                     },
                     child: TextRegular(
                         text: 'Place Order',
