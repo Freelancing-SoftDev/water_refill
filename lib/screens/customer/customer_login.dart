@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:water_refill/screens/register_screen.dart';
+import 'package:water_refill/screens/home_screen.dart';
 import 'package:water_refill/widgets/text_widget.dart';
 
-class SignupScreen extends StatelessWidget {
-  SignupScreen({Key? key}) : super(key: key);
+class CustomerLogin extends StatelessWidget {
+  CustomerLogin({Key? key}) : super(key: key);
 
   late String first_name;
   late String last_name;
@@ -12,6 +12,8 @@ class SignupScreen extends StatelessWidget {
   late String address;
   late String days;
   final box = GetStorage();
+  late String username;
+  late String password;
 
   @override
   Widget build(BuildContext context) {
@@ -136,16 +138,37 @@ class SignupScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 20, left: 28, right: 28),
                 child: TextFormField(
                   onChanged: (String input) {
-                    days = input;
+                    username = input;
                   },
-                  keyboardType: TextInputType.number,
                   textCapitalization: TextCapitalization.words,
                   decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.person),
                       filled: true,
-                      prefixIcon: const Icon(Icons.calendar_today_outlined),
                       fillColor: Colors.white,
                       label: const Text(
-                        'Days Before Water Refill',
+                        'Username',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      border: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(15))),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20, left: 28, right: 28),
+                child: TextFormField(
+                  onChanged: (String input) {
+                    password = input;
+                  },
+                  textCapitalization: TextCapitalization.words,
+                  decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.lock),
+                      filled: true,
+                      fillColor: Colors.white,
+                      label: const Text(
+                        'Password',
                         style: TextStyle(
                           color: Colors.black,
                         ),
@@ -168,9 +191,12 @@ class SignupScreen extends StatelessWidget {
                       box.write('lastName', last_name);
                       box.write('mobileNum', phone_number);
                       box.write('myAddress', address);
-                      box.write('daysBefore', days);
+                      box.write('type', 'customer');
+                      box.write('username', username);
+                      box.write('password', password);
+
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const RegisterScreen()));
+                          builder: (context) => HomeScreen()));
                     },
                     child: TextRegular(
                         text: 'Done', fontSize: 25, color: Colors.black)),
