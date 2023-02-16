@@ -66,7 +66,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     TextRegular(
-                        text: "refilling app",
+                        text: "Refilling\nApp",
                         fontSize: 75,
                         color: Colors.white),
                   ],

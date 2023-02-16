@@ -37,7 +37,7 @@ class SignupScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     TextRegular(
-                        text: "refilling app",
+                        text: "Refilling\nApp",
                         fontSize: 75,
                         color: Colors.white),
                   ],

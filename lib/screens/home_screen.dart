@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     TextRegular(
-                        text: "refilling app",
+                        text: "Refilling\nApp",
                         fontSize: 75,
                         color: Colors.white),
                   ],
@@ -56,7 +56,10 @@ class HomeScreen extends StatelessWidget {
                     text: 'Sign-up as supplier',
                     fontSize: 18,
                     color: Colors.white),
-              )
+              ),
+              const SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),

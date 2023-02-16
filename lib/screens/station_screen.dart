@@ -36,14 +36,14 @@ class StationScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     TextRegular(
-                        text: "refilling app",
+                        text: "Refilling\nApp",
                         fontSize: 40,
                         color: Colors.white),
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 5, top: 55),
+                padding: const EdgeInsets.only(left: 5, top: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
