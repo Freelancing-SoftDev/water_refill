@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:water_refill/widgets/text_widget.dart';
 
+import '../home_screen.dart';
+
 class SellerHome extends StatelessWidget {
   const SellerHome({Key? key}) : super(key: key);
 
@@ -8,6 +10,15 @@ class SellerHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: (() {
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => HomeScreen()));
+            }),
+            icon: const Icon(Icons.logout),
+          ),
+        ],
         automaticallyImplyLeading: false,
         backgroundColor: Colors.blue,
         title:

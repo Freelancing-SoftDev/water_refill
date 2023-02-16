@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:water_refill/screens/customer/order_screen.dart';
 import 'package:water_refill/screens/home_screen.dart';
 import 'package:water_refill/widgets/text_widget.dart';
 
-class CustomerHome extends StatelessWidget {
-  const CustomerHome({Key? key}) : super(key: key);
+class AdminHome extends StatelessWidget {
+  const AdminHome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
           appBar: AppBar(
             actions: [
@@ -30,6 +29,9 @@ class CustomerHome extends StatelessWidget {
                 text: 'Stations',
               ),
               Tab(
+                text: 'Orders',
+              ),
+              Tab(
                 text: 'History',
               ),
             ]),
@@ -45,24 +47,13 @@ class CustomerHome extends StatelessWidget {
                         elevation: 3,
                         child: ListTile(
                           title: TextBold(
-                              text:
-                                  'Refilling Station #$index (08:00 AM - 04:00 PM)',
-                              fontSize: 14,
+                              text: 'Refilling Station #$index',
+                              fontSize: 16,
                               color: Colors.black),
                           subtitle: TextBold(
                               text: 'Cogon, CDO - 09090104355',
                               fontSize: 12,
                               color: Colors.grey),
-                          trailing: IconButton(
-                            onPressed: (() {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => OrderScreen()));
-                            }),
-                            icon: const Icon(
-                              Icons.check_circle_outline,
-                              color: Colors.green,
-                            ),
-                          ),
                         ),
                       ),
                     );
@@ -88,6 +79,32 @@ class CustomerHome extends StatelessWidget {
                           trailing: TextBold(
                               text: '2 Gallons',
                               fontSize: 15,
+                              color: Colors.black),
+                        ),
+                      ),
+                    );
+                  }));
+                }),
+            StreamBuilder<Object>(
+                stream: null,
+                builder: (context, snapshot) {
+                  return ListView.builder(itemBuilder: ((context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                      child: Card(
+                        elevation: 3,
+                        child: ListTile(
+                          subtitle: TextBold(
+                              text: 'Refilling Station #$index',
+                              fontSize: 12,
+                              color: Colors.grey),
+                          title: TextBold(
+                              text: 'John Doe - 2 Gallons',
+                              fontSize: 16,
+                              color: Colors.black),
+                          trailing: TextBold(
+                              text: 'January 25, 2023',
+                              fontSize: 14,
                               color: Colors.black),
                         ),
                       ),

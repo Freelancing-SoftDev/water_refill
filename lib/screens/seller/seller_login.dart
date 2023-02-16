@@ -54,7 +54,7 @@ class _SellerLoginState extends State<SellerLogin> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 100, left: 25),
+                padding: const EdgeInsets.only(top: 50, left: 25),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
