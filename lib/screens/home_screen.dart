@@ -93,7 +93,7 @@ class HomeScreen extends StatelessWidget {
                 child: MaterialButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15)),
-                    color: Colors.white,
+                    color: Colors.lightBlueAccent,
                     minWidth: 150,
                     height: 55,
                     onPressed: () {
@@ -106,7 +106,7 @@ class HomeScreen extends StatelessWidget {
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: TextRegular(
-                                  text: 'Invalid Account',
+                                  text: 'Invalid Account!',
                                   fontSize: 12,
                                   color: Colors.white)));
                         }
@@ -119,7 +119,7 @@ class HomeScreen extends StatelessWidget {
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: TextRegular(
-                                  text: 'Invalid Account',
+                                  text: 'Invalid Account! Try Again',
                                   fontSize: 12,
                                   color: Colors.white)));
                         }
@@ -137,21 +137,21 @@ class HomeScreen extends StatelessWidget {
                     minWidth: 200,
                     height: 55,
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => CustomerLogin()));
                     },
                     child: TextRegular(
-                        text: 'Sign-up', fontSize: 25, color: Colors.black)),
+                        text: 'Sign up', fontSize: 25, color: Colors.black)),
               ),
               Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: TextButton(
                     onPressed: (() {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const SellerLogin()));
                     }),
                     child: TextRegular(
-                        text: 'Sign-up as supplier',
+                        text: 'Sign up as supplier',
                         fontSize: 18,
                         color: Colors.white),
                   )),

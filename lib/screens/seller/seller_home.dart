@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:water_refill/screens/home_screen.dart';
 import 'package:water_refill/widgets/text_widget.dart';
 
 class SellerHome extends StatelessWidget {
@@ -13,6 +14,13 @@ class SellerHome extends StatelessWidget {
         title:
             TextBold(text: 'Supplier Name', fontSize: 18, color: Colors.white),
         centerTitle: true,
+        leading: IconButton(
+          onPressed: (() {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => HomeScreen()));
+          }),
+          icon: const Icon(Icons.arrow_back),
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +42,7 @@ class SellerHome extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
                   child: Card(
-                    elevation: 3,
+                    elevation: 10,
                     child: ListTile(
                       title: TextBold(
                           text: 'Impasugong Bukidnon',

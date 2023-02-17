@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:water_refill/screens/customer/order_screen.dart';
+import 'package:water_refill/screens/home_screen.dart';
 import 'package:water_refill/widgets/text_widget.dart';
 
 class CustomerHome extends StatelessWidget {
@@ -15,22 +16,22 @@ class CustomerHome extends StatelessWidget {
             fontSize: 18,
             color: Colors.white),
         centerTitle: true,
-        // leading: IconButton(
-        //   onPressed: (() {
-        //     Navigator.of(context).pushReplacement(
-        //         MaterialPageRoute(builder: (context) => OrderScreen()));
-        //   }),
-        //   icon: const Icon(Icons.arrow_back),
-        // ),
+        leading: IconButton(
+          onPressed: (() {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => HomeScreen()));
+          }),
+          icon: const Icon(Icons.arrow_back),
+        ),
       ),
       body: ListView.builder(itemBuilder: ((context, index) {
         return Padding(
           padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           child: Card(
-            elevation: 3,
+            elevation: 10,
             child: ListTile(
               title: TextBold(
-                  text: 'Refilling Station #$index',
+                  text: 'Refilling Station # $index',
                   fontSize: 16,
                   color: Colors.black),
               subtitle: TextBold(
