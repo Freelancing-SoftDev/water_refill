@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:water_refill/screens/home_screen.dart';
+import 'package:water_refill/services/add_station.dart';
 import 'package:water_refill/widgets/text_widget.dart';
 
 class SellerLogin extends StatefulWidget {
@@ -165,15 +166,15 @@ class _SellerLoginState extends State<SellerLogin> {
                           padding: const EdgeInsets.only(top: 5),
                           child: MaterialButton(
                             onPressed: _showTimePicker,
-                            child: Text(
-                              _timeOfDay.format(context).toString(),
-                              style: const TextStyle(fontSize: 24),
-                            ),
                             minWidth: 150,
                             height: 50,
                             color: Colors.white,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15)),
+                            child: Text(
+                              _timeOfDay.format(context).toString(),
+                              style: const TextStyle(fontSize: 24),
+                            ),
                           ),
                         ),
                       ],
@@ -189,15 +190,15 @@ class _SellerLoginState extends State<SellerLogin> {
                         children: [
                           MaterialButton(
                             onPressed: showTimePicker2,
-                            child: Text(
-                              _timeOfDay2.format(context).toString(),
-                              style: const TextStyle(fontSize: 24),
-                            ),
                             minWidth: 150,
                             height: 50,
                             color: Colors.white,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15)),
+                            child: Text(
+                              _timeOfDay2.format(context).toString(),
+                              style: const TextStyle(fontSize: 24),
+                            ),
                           ),
                         ],
                       ),
@@ -241,6 +242,9 @@ class _SellerLoginState extends State<SellerLogin> {
                       box.write('username', username);
                       box.write('password', password);
                       box.write('type', 'seller');
+
+                      addStation(station_name, station_address,
+                          _timeOfDay.toString(), _timeOfDay2.toString());
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => HomeScreen()));
                     },

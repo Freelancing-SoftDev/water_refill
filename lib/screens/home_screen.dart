@@ -115,7 +115,7 @@ class HomeScreen extends StatelessWidget {
                             box.read('password') == newPassword) {
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                  builder: (context) => const SellerHome()));
+                                  builder: (context) => SellerHome()));
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: TextRegular(

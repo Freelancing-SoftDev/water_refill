@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:water_refill/screens/home_screen.dart';
 import 'package:water_refill/widgets/text_widget.dart';
 
 class SellerHome extends StatelessWidget {
-  const SellerHome({Key? key}) : super(key: key);
+  final box = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,9 @@ class SellerHome extends StatelessWidget {
           automaticallyImplyLeading: false,
           backgroundColor: Colors.blue,
           title: TextBold(
-              text: 'Supplier Name', fontSize: 18, color: Colors.white),
+              text: box.read('station_name') ?? 'Home',
+              fontSize: 18,
+              color: Colors.white),
           centerTitle: true,
           bottom: const TabBar(tabs: [
             Tab(
