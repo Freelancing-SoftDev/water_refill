@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:water_refill/screens/home_screen.dart';
 import 'package:water_refill/widgets/text_widget.dart';
-
-import '../home_screen.dart';
 
 class SellerHome extends StatelessWidget {
   const SellerHome({Key? key}) : super(key: key);

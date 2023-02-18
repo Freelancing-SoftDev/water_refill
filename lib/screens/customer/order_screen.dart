@@ -15,6 +15,8 @@ class OrderScreen extends StatelessWidget {
         backgroundColor: Colors.blue,
         leading: IconButton(
           onPressed: (() {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => const CustomerHome()));
             Navigator.of(context).pop();
           }),
           icon: const Icon(Icons.arrow_back),

@@ -162,6 +162,7 @@ class CustomerLogin extends StatelessWidget {
                   onChanged: (String input) {
                     password = input;
                   },
+                  obscureText: true,
                   textCapitalization: TextCapitalization.words,
                   decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.lock),

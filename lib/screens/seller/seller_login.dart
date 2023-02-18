@@ -54,7 +54,7 @@ class _SellerLoginState extends State<SellerLogin> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 50, left: 25),
+                padding: const EdgeInsets.only(top: 100, left: 25),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -103,6 +103,7 @@ class _SellerLoginState extends State<SellerLogin> {
                   onChanged: (String input) {
                     password = input;
                   },
+                  obscureText: true,
                   textCapitalization: TextCapitalization.words,
                   decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.lock),
@@ -212,7 +213,7 @@ class _SellerLoginState extends State<SellerLogin> {
                   },
                   textCapitalization: TextCapitalization.words,
                   decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.location_city),
+                      prefixIcon: const Icon(Icons.place),
                       filled: true,
                       fillColor: Colors.white,
                       label: const Text(
@@ -240,7 +241,7 @@ class _SellerLoginState extends State<SellerLogin> {
                       box.write('username', username);
                       box.write('password', password);
                       box.write('type', 'seller');
-                      Navigator.of(context).push(MaterialPageRoute(
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => HomeScreen()));
                     },
                     child: TextRegular(
