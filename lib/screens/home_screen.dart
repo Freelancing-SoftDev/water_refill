@@ -93,7 +93,7 @@ class HomeScreen extends StatelessWidget {
                 child: MaterialButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15)),
-                    color: Colors.lightBlueAccent,
+                    color: Colors.white,
                     minWidth: 150,
                     height: 55,
                     onPressed: () {
@@ -126,7 +126,7 @@ class HomeScreen extends StatelessWidget {
                       }
                     },
                     child: TextRegular(
-                        text: 'Log-in', fontSize: 25, color: Colors.black)),
+                        text: 'Login', fontSize: 25, color: Colors.black)),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 100),
