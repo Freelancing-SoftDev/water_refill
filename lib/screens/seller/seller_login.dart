@@ -20,17 +20,20 @@ class _SellerLoginState extends State<SellerLogin> {
   late String username;
   late String password;
 
-  TimeOfDay _timeOfDay = const TimeOfDay(hour: 00, minute: 00);
-  TimeOfDay _timeOfDay2 = const TimeOfDay(hour: 00, minute: 00);
+  late String _timeOfDay = '';
+  late String _timeOfDay2 = '';
 
   void _showTimePicker() {
     showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
     ).then((value) {
+      print(value);
       setState(() {
-        _timeOfDay = value!;
+        _timeOfDay = ('${value!.hour}:${value.minute}');
       });
+
+      print(_timeOfDay);
     });
   }
 
@@ -40,7 +43,7 @@ class _SellerLoginState extends State<SellerLogin> {
       initialTime: TimeOfDay.now(),
     ).then((value) {
       setState(() {
-        _timeOfDay2 = value!;
+        _timeOfDay2 = ('${value!.hour}:${value.minute}');
       });
     });
   }
@@ -172,7 +175,7 @@ class _SellerLoginState extends State<SellerLogin> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15)),
                             child: Text(
-                              _timeOfDay.format(context).toString(),
+                              _timeOfDay == '' ? 'Select' : _timeOfDay,
                               style: const TextStyle(fontSize: 24),
                             ),
                           ),
@@ -196,7 +199,7 @@ class _SellerLoginState extends State<SellerLogin> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15)),
                             child: Text(
-                              _timeOfDay2.format(context).toString(),
+                              _timeOfDay2 == '' ? 'Select' : _timeOfDay2,
                               style: const TextStyle(fontSize: 24),
                             ),
                           ),
@@ -243,8 +246,8 @@ class _SellerLoginState extends State<SellerLogin> {
                       box.write('password', password);
                       box.write('type', 'seller');
 
-                      addStation(station_name, station_address,
-                          _timeOfDay.toString(), _timeOfDay2.toString());
+                      addStation(station_name, station_address, _timeOfDay,
+                          _timeOfDay2);
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => HomeScreen()));
                     },

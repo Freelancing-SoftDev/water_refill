@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:water_refill/screens/home_screen.dart';
@@ -55,37 +56,60 @@ class SellerHome extends StatelessWidget {
               child: SizedBox(
                 child: TabBarView(
                   children: [
-                    StreamBuilder<Object>(
-                        stream: null,
-                        builder: (context, snapshot) {
+                    StreamBuilder<QuerySnapshot>(
+                        stream: FirebaseFirestore.instance
+                            .collection('Orders')
+                            .snapshots(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if (snapshot.hasError) {
+                            print('error');
+
+                            print(snapshot.error);
+
+                            return const Center(child: Text('Error'));
+                          }
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Padding(
+                              padding: EdgeInsets.only(top: 50),
+                              child: Center(
+                                  child: CircularProgressIndicator(
+                                color: Colors.black,
+                              )),
+                            );
+                          }
+
+                          final data = snapshot.requireData;
                           return SizedBox(
                             child: ListView.builder(
+                                itemCount: data.docs.length,
                                 itemBuilder: ((context, index) {
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(20, 5, 20, 5),
-                                child: Card(
-                                  elevation: 3,
-                                  child: ListTile(
-                                    title: TextBold(
-                                        text: 'Impasugong Bukidnon',
-                                        fontSize: 16,
-                                        color: Colors.black),
-                                    subtitle: TextBold(
-                                        text: 'John Doe - 09090104355',
-                                        fontSize: 12,
-                                        color: Colors.grey),
-                                    trailing: IconButton(
-                                      onPressed: (() {}),
-                                      icon: const Icon(
-                                        Icons.check_circle_outline,
-                                        color: Colors.green,
+                                  return Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                                    child: Card(
+                                      elevation: 3,
+                                      child: ListTile(
+                                        title: TextBold(
+                                            text: 'Impasugong Bukidnon',
+                                            fontSize: 16,
+                                            color: Colors.black),
+                                        subtitle: TextBold(
+                                            text: 'John Doe - 09090104355',
+                                            fontSize: 12,
+                                            color: Colors.grey),
+                                        trailing: IconButton(
+                                          onPressed: (() {}),
+                                          icon: const Icon(
+                                            Icons.check_circle_outline,
+                                            color: Colors.green,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                              );
-                            })),
+                                  );
+                                })),
                           );
                         }),
                     StreamBuilder<Object>(
