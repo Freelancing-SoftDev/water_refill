@@ -42,14 +42,6 @@ class SellerHome extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 25),
-              child: TextBold(
-                  text: 'List of Orders', fontSize: 18, color: Colors.black),
-            ),
-            const SizedBox(
               height: 10,
             ),
             Expanded(
@@ -59,6 +51,132 @@ class SellerHome extends StatelessWidget {
                     StreamBuilder<QuerySnapshot>(
                         stream: FirebaseFirestore.instance
                             .collection('Orders')
+                            .where('stationName',
+                                isEqualTo: box.read('stationName'))
+                            .where('type', isEqualTo: 'Pending')
+                            .snapshots(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if (snapshot.hasError) {
+                            print('error');
+
+                            print(snapshot.error);
+
+                            return const Center(child: Text('Error'));
+                          }
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Padding(
+                              padding: EdgeInsets.only(top: 50),
+                              child: Center(
+                                  child: CircularProgressIndicator(
+                                color: Colors.black,
+                              )),
+                            );
+                          }
+
+                          final data = snapshot.requireData;
+                          return SizedBox(
+                            child: ListView.builder(
+                                itemCount: data.docs.length,
+                                itemBuilder: ((context, index) {
+                                  return Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                                    child: Card(
+                                      elevation: 3,
+                                      child: ListTile(
+                                        onTap: (() {
+                                          showModalBottomSheet(
+                                              context: context,
+                                              builder: ((context) {
+                                                return SizedBox(
+                                                  height: 150,
+                                                  child: Column(
+                                                    children: [
+                                                      ListTile(
+                                                        onTap: (() async {
+                                                          await FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  'Orders')
+                                                              .doc(data
+                                                                  .docs[index]
+                                                                  .id)
+                                                              .update({
+                                                            'type': 'Accepted'
+                                                          });
+                                                          Navigator.pop(
+                                                              context);
+                                                        }),
+                                                        title: TextBold(
+                                                            text:
+                                                                'Accept Order',
+                                                            fontSize: 14,
+                                                            color:
+                                                                Colors.green),
+                                                        trailing: const Icon(
+                                                          Icons
+                                                              .check_circle_outline,
+                                                          color: Colors.green,
+                                                        ),
+                                                      ),
+                                                      ListTile(
+                                                        onTap: (() async {
+                                                          await FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  'Orders')
+                                                              .doc(data
+                                                                  .docs[index]
+                                                                  .id)
+                                                              .update({
+                                                            'type': 'Rejected'
+                                                          });
+                                                          Navigator.pop(
+                                                              context);
+                                                        }),
+                                                        title: TextBold(
+                                                            text:
+                                                                'Reject Order',
+                                                            fontSize: 14,
+                                                            color: Colors.red),
+                                                        trailing: const Icon(
+                                                          Icons.close_sharp,
+                                                          color: Colors.red,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              }));
+                                        }),
+                                        title: TextBold(
+                                            text: data.docs[index]['address'],
+                                            fontSize: 16,
+                                            color: Colors.black),
+                                        subtitle: TextBold(
+                                            text:
+                                                '${data.docs[index]['name']} - ${data.docs[index]['contactNumber']}',
+                                            fontSize: 12,
+                                            color: Colors.grey),
+                                        trailing: TextBold(
+                                            color: Colors.black,
+                                            fontSize: 18,
+                                            text:
+                                                '${data.docs[index]['gallons']} Gallons'),
+                                      ),
+                                    ),
+                                  );
+                                })),
+                          );
+                        }),
+                    StreamBuilder<QuerySnapshot>(
+                        stream: FirebaseFirestore.instance
+                            .collection('Orders')
+                            .where('stationName',
+                                isEqualTo: box.read('stationName'))
+                            .where('type', isEqualTo: 'Accepted')
                             .snapshots(),
                         builder: (BuildContext context,
                             AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -92,54 +210,23 @@ class SellerHome extends StatelessWidget {
                                       elevation: 3,
                                       child: ListTile(
                                         title: TextBold(
-                                            text: 'Impasugong Bukidnon',
+                                            text: data.docs[index]['name'],
                                             fontSize: 16,
                                             color: Colors.black),
                                         subtitle: TextBold(
-                                            text: 'John Doe - 09090104355',
+                                            text:
+                                                '${data.docs[index]['address']}- ${data.docs[index]['contactNumber']}',
                                             fontSize: 12,
                                             color: Colors.grey),
-                                        trailing: IconButton(
-                                          onPressed: (() {}),
-                                          icon: const Icon(
-                                            Icons.check_circle_outline,
-                                            color: Colors.green,
-                                          ),
-                                        ),
+                                        trailing: TextBold(
+                                            text:
+                                                '${data.docs[index]['gallons']} Gallons',
+                                            fontSize: 15,
+                                            color: Colors.black),
                                       ),
                                     ),
                                   );
                                 })),
-                          );
-                        }),
-                    StreamBuilder<Object>(
-                        stream: null,
-                        builder: (context, snapshot) {
-                          return SizedBox(
-                            child: ListView.builder(
-                                itemBuilder: ((context, index) {
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(20, 5, 20, 5),
-                                child: Card(
-                                  elevation: 3,
-                                  child: ListTile(
-                                    title: TextBold(
-                                        text: 'Refilling Station #$index',
-                                        fontSize: 16,
-                                        color: Colors.black),
-                                    subtitle: TextBold(
-                                        text: 'Cogon, CDO - 09090104355',
-                                        fontSize: 12,
-                                        color: Colors.grey),
-                                    trailing: TextBold(
-                                        text: '2 Gallons',
-                                        fontSize: 15,
-                                        color: Colors.black),
-                                  ),
-                                ),
-                              );
-                            })),
                           );
                         }),
                   ],
