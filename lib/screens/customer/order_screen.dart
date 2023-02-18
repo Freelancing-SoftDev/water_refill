@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:water_refill/screens/customer/customer_home.dart';
+import 'package:water_refill/services/add_order.dart';
 import 'package:water_refill/widgets/text_widget.dart';
 
 class OrderScreen extends StatelessWidget {
@@ -16,7 +17,7 @@ class OrderScreen extends StatelessWidget {
         leading: IconButton(
           onPressed: (() {
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const CustomerHome()));
+                MaterialPageRoute(builder: (context) => CustomerHome()));
             Navigator.of(context).pop();
           }),
           icon: const Icon(Icons.arrow_back),
@@ -105,13 +106,20 @@ class OrderScreen extends StatelessWidget {
                     minWidth: 150,
                     height: 55,
                     onPressed: () {
+                      addOrder(
+                          box.read('firstName') + box.read('lastName') ?? '',
+                          box.read('myAddress') ?? '',
+                          box.read('mobileNum') ?? '',
+                          box.read('stationId') ?? '',
+                          gallons,
+                          days);
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: TextRegular(
                               text: 'Order placed!',
                               fontSize: 12,
                               color: Colors.white)));
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => const CustomerHome()));
+                          builder: (context) => CustomerHome()));
                     },
                     child: TextRegular(
                         text: 'Place Order',
