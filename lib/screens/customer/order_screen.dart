@@ -17,6 +17,7 @@ class OrderScreen extends StatelessWidget {
           onPressed: (() {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const CustomerHome()));
+            Navigator.of(context).pop();
           }),
           icon: const Icon(Icons.arrow_back),
         ),
