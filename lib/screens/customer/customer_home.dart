@@ -93,31 +93,60 @@ class CustomerHome extends StatelessWidget {
                         );
                       }));
                 }),
-            StreamBuilder<Object>(
-                stream: null,
-                builder: (context, snapshot) {
-                  return ListView.builder(itemBuilder: ((context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-                      child: Card(
-                        elevation: 3,
-                        child: ListTile(
-                          title: TextBold(
-                              text: 'Refilling Station #$index',
-                              fontSize: 16,
-                              color: Colors.black),
-                          subtitle: TextBold(
-                              text: 'Cogon, CDO - 09090104355',
-                              fontSize: 12,
-                              color: Colors.grey),
-                          trailing: TextBold(
-                              text: '2 Gallons',
-                              fontSize: 15,
-                              color: Colors.black),
-                        ),
-                      ),
+            StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection('Orders')
+                    .where('name',
+                        isEqualTo: box.read('firstName') + box.read('lastName'))
+                    .snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    print('error');
+
+                    print(snapshot.error);
+
+                    return const Center(child: Text('Error'));
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Padding(
+                      padding: EdgeInsets.only(top: 50),
+                      child: Center(
+                          child: CircularProgressIndicator(
+                        color: Colors.black,
+                      )),
                     );
-                  }));
+                  }
+
+                  final data = snapshot.requireData;
+                  return ListView.builder(
+                      itemCount: data.docs.length,
+                      itemBuilder: ((context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                          child: Card(
+                            elevation: 3,
+                            child: ListTile(
+                              title: TextBold(
+                                  text: data.docs[index]['name'] +
+                                      ' - ' +
+                                      data.docs[index]['type'],
+                                  fontSize: 16,
+                                  color: Colors.black),
+                              subtitle: TextBold(
+                                  text:
+                                      '${data.docs[index]['address']} - ${data.docs[index]['contactNumber']}',
+                                  fontSize: 12,
+                                  color: Colors.grey),
+                              trailing: TextBold(
+                                  text:
+                                      '${data.docs[index]['gallons']} Gallons',
+                                  fontSize: 15,
+                                  color: Colors.black),
+                            ),
+                          ),
+                        );
+                      }));
                 }),
           ])),
     );
