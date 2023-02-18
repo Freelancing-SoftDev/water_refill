@@ -80,6 +80,8 @@ class CustomerHome extends StatelessWidget {
                               trailing: IconButton(
                                 onPressed: (() {
                                   box.write('stationId', data.docs[index].id);
+                                  box.write(
+                                      'stationName', data.docs[index]['name']);
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => OrderScreen()));
                                 }),

@@ -113,7 +113,8 @@ class OrderScreen extends StatelessWidget {
                           box.read('mobileNum') ?? '',
                           box.read('stationId') ?? '',
                           gallons,
-                          days);
+                          days,
+                          box.read('stationName') ?? '');
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: TextRegular(
                               text: 'Order placed!',
