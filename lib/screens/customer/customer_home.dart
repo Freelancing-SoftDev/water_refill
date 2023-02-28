@@ -13,6 +13,8 @@ class CustomerHome extends StatelessWidget {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
+            leading:
+                IconButton(onPressed: (() {}), icon: const Icon(Icons.map)),
             actions: [
               IconButton(
                 onPressed: (() {

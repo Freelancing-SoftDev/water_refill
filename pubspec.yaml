@@ -39,7 +39,7 @@ dependencies:
   cloud_firestore:
   firebase_storage:
   intl: ^0.18.0
-  fluttertoast:
+  # fluttertoast:
 
 dev_dependencies:
   flutter_test:
