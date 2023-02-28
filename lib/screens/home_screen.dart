@@ -3,7 +3,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:water_refill/screens/customer/customer_home.dart';
 import 'package:water_refill/screens/customer/customer_login.dart';
 import 'package:water_refill/screens/seller/seller_home.dart';
-import 'package:water_refill/screens/seller/seller_login.dart';
 import 'package:water_refill/widgets/text_widget.dart';
 
 import 'admin/admin_home.dart';
@@ -151,10 +150,10 @@ class HomeScreen extends StatelessWidget {
                   child: TextButton(
                     onPressed: (() {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const SellerLogin()));
+                          builder: (context) => SellerHome()));
                     }),
                     child: TextRegular(
-                        text: 'Sign up as supplier',
+                        text: 'Continue as supplier',
                         fontSize: 18,
                         color: Colors.white),
                   )),
