@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:water_refill/screens/home_screen.dart';
 import 'package:water_refill/widgets/text_widget.dart';
@@ -195,6 +196,7 @@ class CustomerLogin extends StatelessWidget {
                       box.write('type', 'customer');
                       box.write('username', username);
                       box.write('password', password);
+                      Fluttertoast.showToast(msg: 'Signed up Succesfully!');
 
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => HomeScreen()));
