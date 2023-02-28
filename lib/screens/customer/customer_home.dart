@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:water_refill/screens/customer/maps_screen.dart';
 import 'package:water_refill/screens/customer/order_screen.dart';
 import 'package:water_refill/screens/home_screen.dart';
 import 'package:water_refill/widgets/text_widget.dart';
@@ -13,8 +14,12 @@ class CustomerHome extends StatelessWidget {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-            leading:
-                IconButton(onPressed: (() {}), icon: const Icon(Icons.map)),
+            leading: IconButton(
+                onPressed: (() {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const MapSample()));
+                }),
+                icon: const Icon(Icons.map)),
             actions: [
               IconButton(
                 onPressed: (() {
