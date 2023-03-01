@@ -24,7 +24,7 @@ class MapSampleState extends State<MapSample> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: TextBold(text: 'Aquafit', fontSize: 18, color: Colors.white),
+        title: TextBold(text: 'Aqua Fit', fontSize: 18, color: Colors.white),
         centerTitle: true,
       ),
       body: GoogleMap(
