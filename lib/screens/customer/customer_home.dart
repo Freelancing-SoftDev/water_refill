@@ -35,7 +35,7 @@ class CustomerHome extends StatelessWidget {
             centerTitle: true,
             bottom: const TabBar(tabs: [
               Tab(
-                text: 'My Order',
+                text: 'Orders',
               ),
               Tab(
                 text: 'History',
@@ -52,6 +52,7 @@ class CustomerHome extends StatelessWidget {
             StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('Orders')
+                    .where('type', isEqualTo: 'Pending')
                     .where('name',
                         isEqualTo: box.read('firstName') + box.read('lastName'))
                     .snapshots(),
@@ -107,6 +108,7 @@ class CustomerHome extends StatelessWidget {
             StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('Orders')
+                    .where('type', isEqualTo: 'Accepted')
                     .where('name',
                         isEqualTo: box.read('firstName') + box.read('lastName'))
                     .snapshots(),
