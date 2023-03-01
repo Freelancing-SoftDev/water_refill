@@ -51,8 +51,6 @@ class SellerHome extends StatelessWidget {
                     StreamBuilder<QuerySnapshot>(
                         stream: FirebaseFirestore.instance
                             .collection('Orders')
-                            .where('stationName',
-                                isEqualTo: box.read('stationName'))
                             .where('type', isEqualTo: 'Pending')
                             .snapshots(),
                         builder: (BuildContext context,
@@ -174,8 +172,6 @@ class SellerHome extends StatelessWidget {
                     StreamBuilder<QuerySnapshot>(
                         stream: FirebaseFirestore.instance
                             .collection('Orders')
-                            .where('stationName',
-                                isEqualTo: box.read('stationName'))
                             .where('type', isEqualTo: 'Accepted')
                             .snapshots(),
                         builder: (BuildContext context,
