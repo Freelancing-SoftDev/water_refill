@@ -109,14 +109,13 @@ class OrderScreen extends StatelessWidget {
                     height: 55,
                     onPressed: () {
                       addOrder(
-                          box.read('firstName') + '' + box.read('lastName') ??
-                              '',
-                          box.read('myAddress') ?? '',
-                          box.read('mobileNum') ?? '',
-                          box.read('stationId') ?? '',
-                          gallons,
-                          days,
-                          box.read('stationName') ?? '');
+                        box.read('firstName') + '' + box.read('lastName') ?? '',
+                        box.read('myAddress') ?? '',
+                        box.read('mobileNum') ?? '',
+                        box.read('stationId') ?? '',
+                        gallons,
+                        days,
+                      );
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: TextRegular(
                               text: 'Order placed!',

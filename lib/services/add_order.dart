@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-Future addOrder(String name, address, contactNumber, stationId, gallons,
-    daysToFill, stationName) async {
+Future addOrder(
+    String name, address, contactNumber, stationId, gallons, daysToFill) async {
   final docUser = FirebaseFirestore.instance.collection('Orders').doc();
 
   final json = {
@@ -13,7 +13,6 @@ Future addOrder(String name, address, contactNumber, stationId, gallons,
     'gallons': gallons,
     'daysToFill': daysToFill,
     'type': 'Pending',
-    'stationName': stationName
   };
 
   await docUser.set(json);
