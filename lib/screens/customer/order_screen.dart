@@ -44,10 +44,14 @@ class OrderScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    TextRegular(
-                        text: 'Address: Station Address',
-                        fontSize: 18,
-                        color: Colors.white),
+                    SizedBox(
+                      width: 300,
+                      child: TextRegular(
+                          text:
+                              'Address: Yap Building, Broce Street, San Carlos City , Neg. OCC., Broce St, San Carlos City, 6127 Negros Occidental',
+                          fontSize: 18,
+                          color: Colors.white),
+                    ),
                   ],
                 ),
               ),
