@@ -35,9 +35,7 @@ class OrderScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     TextRegular(
-                        text: 'Station Name',
-                        fontSize: 32,
-                        color: Colors.white),
+                        text: 'AQUAFIT', fontSize: 32, color: Colors.white),
                   ],
                 ),
               ),

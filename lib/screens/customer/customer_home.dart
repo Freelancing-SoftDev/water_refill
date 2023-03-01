@@ -35,17 +35,25 @@ class CustomerHome extends StatelessWidget {
             centerTitle: true,
             bottom: const TabBar(tabs: [
               Tab(
-                text: 'Stations',
+                text: 'My Order',
               ),
               Tab(
                 text: 'History',
               ),
             ]),
           ),
+          floatingActionButton: FloatingActionButton(
+              onPressed: (() {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => OrderScreen()));
+              }),
+              child: const Icon(Icons.add)),
           body: TabBarView(children: [
             StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
-                    .collection('Stations')
+                    .collection('Orders')
+                    .where('name',
+                        isEqualTo: box.read('firstName') + box.read('lastName'))
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -76,27 +84,21 @@ class CustomerHome extends StatelessWidget {
                             elevation: 3,
                             child: ListTile(
                               title: TextBold(
-                                  text:
-                                      '${data.docs[index]['name']} (${data.docs[index]['open']} -${data.docs[index]['close']})',
-                                  fontSize: 14,
+                                  text: data.docs[index]['name'] +
+                                      ' - ' +
+                                      data.docs[index]['type'],
+                                  fontSize: 16,
                                   color: Colors.black),
                               subtitle: TextBold(
-                                  text: '${data.docs[index]['address']}',
+                                  text:
+                                      '${data.docs[index]['address']} - ${data.docs[index]['contactNumber']}',
                                   fontSize: 12,
                                   color: Colors.grey),
-                              trailing: IconButton(
-                                onPressed: (() {
-                                  box.write('stationId', data.docs[index].id);
-                                  box.write(
-                                      'stationName', data.docs[index]['name']);
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => OrderScreen()));
-                                }),
-                                icon: const Icon(
-                                  Icons.check_circle_outline,
-                                  color: Colors.green,
-                                ),
-                              ),
+                              trailing: TextBold(
+                                  text:
+                                      '${data.docs[index]['gallons']} Gallons',
+                                  fontSize: 15,
+                                  color: Colors.black),
                             ),
                           ),
                         );
